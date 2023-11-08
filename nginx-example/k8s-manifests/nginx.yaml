@@ -32,6 +32,7 @@ metadata:
   name: nginx
   labels:
     name: nginx
+    version: 0.1.0
 spec:
   selector:
     matchLabels:
@@ -62,8 +63,8 @@ spec:
               memory: "200Mi"
               cpu: "100m"
             limits:
-              memory: "1000Mi"
-              cpu: "1000m"
+              memory: "500Mi"
+              cpu: "500m"
           ports:
             - containerPort: 80
           volumeMounts:
