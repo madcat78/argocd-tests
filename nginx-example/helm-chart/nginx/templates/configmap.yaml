@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nginx.fullname" . }}-conf
+data:
+  default.conf: |
+    server_tokens off;
+
+    server {
+      listen *:80;
+      server_name _;
+      access_log /dev/stdout;
+      error_log /dev/stderr;
+
+      location /healthcheck {
+        access_log off;
+        add_header Content-Type text/plain;
+        return 200 "healthy\n";
+      }
+
+      location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+
+        try_files $uri $uri/ /index.html;
+      }
+    }
